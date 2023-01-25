@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from '$app/forms';
     import type { ActionData, PageData } from './$types';
 
     export let data: PageData;
@@ -13,7 +14,7 @@
     {#each data.todos as todo}
         <li>
             <span>{todo.text}</span>
-            <form method="POST" action="?/removeTodo">
+            <form method="POST" action="?/removeTodo" use:enhance>
                 <input type="hidden" name="id" value={todo.id} />
                 <button class="delete" type="submit">X</button>
             </form>
@@ -21,7 +22,7 @@
     {/each}
 </ul>
 
-<form method="POST" action="?/addTodo">
+<form method="POST" action="?/addTodo" use:enhance>
     <input type="text" name="todo" />
     {#if form?.missing}
         <p class="error">This field is required</p>
